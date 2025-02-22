@@ -15,7 +15,7 @@ public class Main {
         for (int k = 0; k < array.length; k++) {
             sum += array[k];
             try {
-                Thread.sleep(1000);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -49,6 +49,15 @@ public class Main {
         System.out.println("Sum = " + sum_m2);
 
         //Third method ForkJoin
+        ForkJoinPool pool = new ForkJoinPool();
 
+        MyThread task = new MyThread(array, 0, array.length);
+
+        long start_time_m3 = System.currentTimeMillis();
+
+        int sum_m3 = pool.invoke(task);
+
+        System.out.println("Third method time: " + (System.currentTimeMillis() - start_time_m3));
+        System.out.println("Sum = " + sum_m3);
     }
 }
